@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🍫 巧克力对半分 · 等份切分</title>
+  <meta name="description" content="把一整块格子巧克力，沿着缝隙掰成大小形状一模一样的两半。一个屏幕摆好几块，孩子可以同时尝试多种分法。" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🍫 巧克力对半分</h1>
+    <p class="tagline">沿着巧克力的<strong>缝隙</strong>画线，把它掰成<strong>大小、形状一模一样</strong>的两半，每一半都要连在一起！</p>
+  </header>
+
+  <section class="panel">
+    <div class="setting">
+      <label for="rows">行</label>
+      <select id="rows"></select>
+    </div>
+    <div class="setting">
+      <label for="cols">列</label>
+      <select id="cols"></select>
+    </div>
+    <div class="setting">
+      <label for="count">巧克力块数</label>
+      <select id="count"></select>
+    </div>
+    <button id="applyBtn" class="btn primary">换新巧克力</button>
+    <button id="clearAllBtn" class="btn">全部擦掉重画</button>
+  </section>
+
+  <p id="parityNote" class="parity-note hidden">⚠️ 格子总数是奇数，没办法平分成两半，换个行/列试试～</p>
+
+  <section class="stats">
+    <div class="stat">
+      <span class="stat-num" id="solvedNum">0</span>
+      <span class="stat-label">已分成功</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" id="distinctNum">0</span>
+      <span class="stat-label">不同的分法 🏆</span>
+    </div>
+    <div class="legend">
+      <span><i class="dot half-a"></i> 一半</span>
+      <span><i class="dot half-b"></i> 另一半</span>
+      <span class="hint">点缝隙切一刀，再点一下取消</span>
+    </div>
+  </section>
+
+  <p id="targetNote" class="target-note"></p>
+
+  <main id="boards" class="boards"></main>
+
+  <footer class="footer">
+    小提示：可以在缝隙上<strong>按住拖动</strong>，一次画一长条。多摆几块，比比看谁的分法更不一样！
+  </footer>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

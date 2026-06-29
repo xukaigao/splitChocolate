@@ -1,0 +1,279 @@
+:root {
+  --bg1: #fff3e0;
+  --bg2: #ffe0b2;
+  --cocoa: #4e2a14;
+  --cocoa-soft: #6b4226;
+  --milk: #8a5a2b;
+  --milk-light: #a9743c;
+  --white-choc: #e9cfa3;
+  --groove: #2e1606;
+  --cut: #fff7e6;
+  --ok: #2e9e57;
+  --card: #ffffff;
+  --shadow: 0 8px 22px rgba(78, 42, 20, 0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+  color: var(--cocoa);
+  background: linear-gradient(160deg, var(--bg1), var(--bg2));
+  min-height: 100vh;
+  padding-bottom: 40px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.topbar {
+  text-align: center;
+  padding: 26px 18px 12px;
+}
+
+.topbar h1 {
+  font-size: clamp(1.6rem, 4.5vw, 2.3rem);
+  letter-spacing: 1px;
+}
+
+.tagline {
+  margin-top: 8px;
+  color: var(--cocoa-soft);
+  font-size: clamp(0.9rem, 2.4vw, 1.05rem);
+  max-width: 640px;
+  margin-inline: auto;
+  line-height: 1.5;
+}
+
+.tagline strong { color: var(--milk); }
+
+/* 控制面板 */
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 14px;
+  max-width: 720px;
+  margin: 6px auto 0;
+}
+
+.setting {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--cocoa-soft);
+}
+
+.setting select {
+  font-size: 1rem;
+  padding: 7px 12px;
+  border-radius: 12px;
+  border: 2px solid #e5c69c;
+  background: #fff;
+  color: var(--cocoa);
+  cursor: pointer;
+}
+
+.btn {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--milk);
+  border: 2px solid #e5c69c;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.btn.primary {
+  background: var(--milk);
+  color: #fff;
+  border-color: var(--milk);
+}
+
+.parity-note {
+  text-align: center;
+  color: #c0392b;
+  font-weight: 600;
+  margin: 6px 16px;
+}
+
+.target-note {
+  text-align: center;
+  color: var(--milk);
+  font-weight: 700;
+  font-size: clamp(0.92rem, 2.5vw, 1.08rem);
+  margin: 10px 16px 0;
+}
+
+/* 统计 */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px 4px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 8px 18px;
+  box-shadow: var(--shadow);
+  min-width: 92px;
+}
+
+.stat-num {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--milk);
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--cocoa-soft);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--cocoa-soft);
+}
+
+.legend .dot {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 4px;
+  vertical-align: -2px;
+  margin-right: 3px;
+}
+
+.dot.half-a { background: var(--milk); }
+.dot.half-b { background: var(--white-choc); border: 1px solid #cda86f; }
+.legend .hint { opacity: 0.8; }
+
+/* 棋盘网格 */
+.boards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 18px;
+  max-width: 1100px;
+  margin: 14px auto 0;
+  padding: 0 16px;
+}
+
+.board-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 12px 12px 10px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.board-card.solved {
+  box-shadow: 0 0 0 3px var(--ok), var(--shadow);
+}
+
+.board-card svg {
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  display: block;
+}
+
+.board-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.board-status {
+  font-size: 0.8rem;
+  color: var(--cocoa-soft);
+  line-height: 1.3;
+  flex: 1;
+}
+
+.board-status.ok { color: var(--ok); font-weight: 700; }
+.board-status.warn { color: #c0792b; }
+
+.mini-clear {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.5px solid #e5c69c;
+  background: #fff;
+  color: var(--milk);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.mini-clear:hover { background: #fff3e0; }
+
+/* 巧克力块与切线 */
+.choco-bar { fill: var(--groove); }
+.cell { stroke: var(--groove); stroke-width: 1; transition: fill 0.18s ease; }
+.cell-hi { fill: rgba(255, 255, 255, 0.18); pointer-events: none; }
+.cut-line {
+  stroke: var(--cut);
+  stroke-width: 6;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35));
+  pointer-events: none;
+}
+.hot {
+  stroke: transparent;
+  stroke-linecap: round;
+  cursor: pointer;
+  pointer-events: stroke;
+}
+
+.sparkle { pointer-events: none; animation: pop 0.5s ease; transform-origin: center; }
+
+@keyframes pop {
+  0% { transform: scale(0.2); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.board-card.solved svg { animation: wob 0.45s ease; }
+@keyframes wob {
+  0%, 100% { transform: rotate(0); }
+  30% { transform: rotate(-1.5deg); }
+  70% { transform: rotate(1.5deg); }
+}
+
+.footer {
+  text-align: center;
+  color: var(--cocoa-soft);
+  font-size: 0.85rem;
+  margin-top: 26px;
+  padding: 0 18px;
+}
+
+.hidden { display: none; }
+
+@media (max-width: 480px) {
+  .boards { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .panel { gap: 8px; }
+}
