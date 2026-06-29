@@ -34,6 +34,38 @@
   const distinctNumEl = $("distinctNum");
   const parityNote = $("parityNote");
   const targetNote = $("targetNote");
+  const praiseModal = $("praiseModal");
+  const praiseTitle = $("praiseTitle");
+  const praiseText = $("praiseText");
+
+  // 彩虹屁：随机一句，肯定 6–12 岁孩子的努力与思考
+  const PRAISES = [
+    "你的小脑袋瓜转得真快，这么巧的分法都被你想出来了！",
+    "哇，你太会动脑筋了，每一刀都切得好聪明！",
+    "你真有耐心，一点点试出了这么多种分法，了不起！",
+    "这么难的形状都难不倒你，你就是解谜小高手！",
+    "你观察得好仔细，连这种藏起来的分法都被你发现了！",
+    "厉害！你的想法又多又妙，简直像个小数学家！",
+    "你一直没放弃，认真思考的样子特别棒！",
+    "哇塞，你的空间想象力太强啦，佩服佩服！",
+    "每一种新分法，都是你动脑筋的成果，真为你骄傲！",
+    "你越来越熟练了，脑筋动得又快又准！",
+    "你敢去试不一样的切法，这份勇气超级棒！",
+    "太棒了，你把巧克力分得又公平又漂亮！",
+    "你的专注力真高，一道接一道，停都停不下来！",
+    "这一刀切得太妙了，你的创意让人惊喜！",
+    "你像小侦探一样，把每一种可能都找了出来！",
+    "你的努力一点都没白费，看看你找到了这么多！",
+    "真聪明！你能从不同角度去想，特别厉害！",
+    "你越想越起劲，这就是爱思考的小天才呀！",
+    "你的手和脑配合得真好，切得又稳又准！",
+    "你做得超出我的想象，继续加油，你最棒！",
+  ];
+  function randomPraise() { return PRAISES[Math.floor(Math.random() * PRAISES.length)]; }
+
+  // 里程碑触发标记（每次换新巧克力时重置）
+  let halfShown = false, allShown = false, lastBigMilestone = 0;
+  let praiseTimer = 0;
 
   const SVGNS = "http://www.w3.org/2000/svg";
   const el = (name, attrs) => {
@@ -450,6 +482,37 @@
     solvedNumEl.textContent = solved;
     distinctNumEl.textContent = distinctSolutions.size;
     renderTargetNote();
+    checkMilestones(distinctSolutions.size);
+  }
+
+  function showPraise(title) {
+    praiseTitle.textContent = title;
+    praiseText.textContent = randomPraise();
+    praiseModal.classList.remove("hidden");
+    clearTimeout(praiseTimer);
+    praiseTimer = setTimeout(hidePraise, 6000);
+  }
+  function hidePraise() { praiseModal.classList.add("hidden"); }
+
+  function checkMilestones(found) {
+    if (totalState === "ok" && totalSolutions > 0) {
+      if (!allShown && found >= totalSolutions) {
+        allShown = true; halfShown = true;
+        showPraise(`🏆 全部 ${totalSolutions} 种分法都被你找齐啦！`);
+        return;
+      }
+      const half = Math.ceil(totalSolutions / 2);
+      if (!halfShown && found >= half && found < totalSolutions) {
+        halfShown = true;
+        showPraise(`🎉 恭喜你已经完成 ${found} 种分法啦！`);
+      }
+    } else if (totalState === "big" || totalState === "capped") {
+      // 不知道总数时，每找到 5 种鼓励一次
+      if (found > 0 && found % 5 === 0 && found !== lastBigMilestone) {
+        lastBigMilestone = found;
+        showPraise(`🎉 已经找出 ${found} 种不同形状啦！`);
+      }
+    }
   }
 
   function renderTargetNote() {
@@ -469,6 +532,8 @@
     boardsEl.innerHTML = "";
     boards = [];
     distinctSolutions.clear();
+    halfShown = false; allShown = false; lastBigMilestone = 0;
+    hidePraise();
 
     const odd = (rows * cols) % 2 !== 0;
     parityNote.classList.toggle("hidden", !odd);
@@ -538,6 +603,11 @@
 
     $("clearAllBtn").addEventListener("click", () => {
       for (const b of boards) { b.cuts.clear(); refreshBoard(b); }
+    });
+
+    $("praiseClose").addEventListener("click", hidePraise);
+    praiseModal.addEventListener("click", (e) => {
+      if (e.target === praiseModal) hidePraise();
     });
 
     makeBoards();
