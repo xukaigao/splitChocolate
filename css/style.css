@@ -7,7 +7,7 @@
   --milk-light: #a9743c;
   --white-choc: #e9cfa3;
   --groove: #2e1606;
-  --cut: #fff7e6;
+  --cut: #ff2b2b;
   --ok: #2e9e57;
   --card: #ffffff;
   --shadow: 0 8px 22px rgba(78, 42, 20, 0.18);
@@ -236,9 +236,9 @@ body {
 .cell-hi { fill: rgba(255, 255, 255, 0.18); pointer-events: none; }
 .cut-line {
   stroke: var(--cut);
-  stroke-width: 6;
+  stroke-width: 7;
   stroke-linecap: round;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35));
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.9)) drop-shadow(0 1px 1px rgba(0,0,0,0.3));
   pointer-events: none;
 }
 .hot {
