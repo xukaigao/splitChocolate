@@ -6,6 +6,16 @@
   <title>🍫 巧克力对半分 · 等份切分</title>
   <meta name="description" content="把一整块格子巧克力，沿着缝隙掰成大小形状一模一样的两半。一个屏幕摆好几块，孩子可以同时尝试多种分法。" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- PWA：可安装到主屏、离线运行 -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#6b4226" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="巧克力对半分" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.svg" />
 </head>
 <body>
   <header class="topbar">
@@ -66,5 +76,13 @@
   </div>
 
   <script src="js/game.js"></script>
+  <script>
+    // 注册 Service Worker，实现离线可玩（失败也不影响正常游戏）
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

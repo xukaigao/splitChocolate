@@ -1,0 +1,20 @@
+{
+  "name": "巧克力对半分",
+  "short_name": "巧克力对半分",
+  "description": "把一整块格子巧克力，沿着缝隙掰成大小形状一模一样的两半。",
+  "lang": "zh-CN",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fff3e0",
+  "theme_color": "#6b4226",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
